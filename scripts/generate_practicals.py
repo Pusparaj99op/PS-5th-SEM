@@ -9,7 +9,7 @@ PRACTICALS = [
 {
 "num": 1, "title": "Study and Implementation of Advanced Data Structures in Python",
 "aim": "To study and implement advanced data structures such as Stack, Queue, and Linked List in Python.",
-"theory": "A Stack is a linear data structure that follows the LIFO (Last In First Out) principle, where insertion and deletion happen at one end (top). A Queue follows the FIFO (First In First Out) principle, where insertion happens at the rear and deletion at the front; Python's collections.deque provides an efficient implementation. A Linked List is a linear collection of nodes where each node stores data and a reference (pointer) to the next node, allowing dynamic memory allocation unlike arrays.",
+"theory": "A Stack is a linear data structure that follows the LIFO (Last In First Out) principle, where insertion and deletion happen at one end called the top. The two primary operations are push (insert) and pop (remove), both performed in O(1) time; stacks are used in function call management, expression evaluation, undo mechanisms, and backtracking algorithms. A Queue follows the FIFO (First In First Out) principle, where insertion (enqueue) happens at the rear and deletion (dequeue) at the front; unlike a plain Python list, collections.deque is implemented as a doubly linked list internally, giving O(1) time complexity for operations at both ends instead of O(n) for a list. A Linked List is a linear collection of nodes where each node stores data and a reference (pointer) to the next node, allowing dynamic memory allocation and efficient insertion/deletion (O(1) once the position is known) unlike arrays, which require contiguous memory and O(n) shifting. Variants include singly linked lists (one-directional traversal, used here), doubly linked lists (traversal in both directions), and circular linked lists (last node points back to the first). Together, these three structures form the foundation for more advanced data structures such as trees, graphs, and hash tables.",
 "algorithm": [
 "Create an empty list to act as a stack.",
 "Push elements onto the stack using append() and pop the last element using pop().",
@@ -51,7 +51,7 @@ Linked List: [1, 2, 3]""",
 {
 "num": 2, "title": "Object-Oriented Programming Concepts",
 "aim": "To study and implement Object-Oriented Programming concepts such as classes, objects, inheritance, and method overriding in Python.",
-"theory": "Object-Oriented Programming (OOP) is a paradigm based on the concept of objects, which bundle data and behavior together. A class is a blueprint for creating objects. Inheritance allows a class (child) to acquire properties and methods of another class (parent). Method overriding allows a subclass to provide a specific implementation of a method already defined in its parent class, enabling polymorphism.",
+"theory": "Object-Oriented Programming (OOP) is a programming paradigm based on the concept of objects, which bundle data (attributes) and behavior (methods) together, in contrast to procedural programming which separates data and functions. OOP rests on four main pillars: Encapsulation, which hides internal state and requires interaction through well-defined methods; Abstraction, which exposes only essential features while hiding implementation detail; Inheritance, which allows a class (child/subclass) to acquire properties and methods of another class (parent/superclass), promoting code reuse; and Polymorphism, which allows objects of different classes to be treated through a common interface. A class is a blueprint or template for creating objects, while an object is a concrete instance of a class with its own state. The __init__ method is a constructor, automatically invoked when an object is created, used to initialize instance attributes. Method overriding is a form of runtime polymorphism where a subclass provides a specific implementation of a method already defined in its parent class; when the method is called on a subclass object, Python's dynamic dispatch ensures the overridden version executes, which is demonstrated when Dog and Cat objects both respond differently to the same speak() call.",
 "algorithm": [
 "Define a base class Animal with an __init__ method and a speak() method.",
 "Define subclasses Dog and Cat that inherit from Animal.",
@@ -84,7 +84,7 @@ Whiskers meows""",
 {
 "num": 3, "title": "File Handling and OS Module Operations",
 "aim": "To study and implement file handling and OS module operations such as creating directories, reading/writing files, renaming, and deleting files in Python.",
-"theory": "File handling in Python allows programs to create, read, write, and manipulate files stored on disk using the built-in open() function with modes like 'w' (write) and 'r' (read). The os module provides functions to interact with the operating system, such as makedirs() to create directories, listdir() to list files, rename() to rename files, remove() to delete files, and rmdir() to delete empty directories.",
+"theory": "File handling in Python allows programs to create, read, write, append to, and manipulate files stored on persistent storage using the built-in open() function, which supports modes such as 'w' (write, truncates existing content), 'r' (read), 'a' (append), and 'x' (exclusive creation), along with binary variants like 'wb'/'rb'. Using a 'with' statement (context manager) ensures the file is automatically and safely closed even if an exception occurs, which is why it is preferred over manual open()/close() calls. The os module provides a cross-platform interface to interact with the underlying operating system: os.makedirs() creates a directory (and any missing intermediate directories, with exist_ok=True avoiding an error if it already exists), os.listdir() lists the names of entries in a directory, os.rename() renames or moves a file, os.remove() deletes a file, and os.rmdir() deletes an empty directory. Related modules such as os.path (for path manipulation and existence checks) and shutil (for recursive copy/move/delete of non-empty directories) are commonly used alongside the os module for complete file-system automation.",
 "algorithm": [
 "Import the os module.",
 "Create a directory using os.makedirs().",
@@ -124,7 +124,7 @@ Cleanup done""",
 {
 "num": 4, "title": "Exception Handling and Fetching Data from a REST API",
 "aim": "To study and implement exception handling in Python while fetching data from a REST API.",
-"theory": "Exception handling in Python is done using try, except, and finally blocks, which allow a program to handle runtime errors gracefully without crashing. A REST API (Representational State Transfer) allows applications to communicate over HTTP, exchanging data typically in JSON format. The urllib.request module can be used to send HTTP requests, and the json module parses JSON responses into Python objects.",
+"theory": "Exception handling in Python is done using try, except, else, and finally blocks: code that might raise a runtime error is placed in the try block, the except block catches and handles specific (or general) exception types so the program does not crash abruptly, an optional else block runs only if no exception occurred, and the finally block always executes regardless of whether an exception was raised, making it ideal for cleanup actions like closing files or connections. Catching specific exception classes (e.g., URLError, TimeoutError) instead of a bare except is considered good practice as it avoids silently hiding unrelated bugs. A REST API (Representational State Transfer) is an architectural style that allows applications to communicate over HTTP using standard methods such as GET, POST, PUT, and DELETE, typically exchanging data in JSON (JavaScript Object Notation) format because it is lightweight and language-independent. The urllib.request module (a built-in alternative to third-party libraries like requests) can be used to send HTTP requests and read server responses, while the json module provides json.loads() to parse a JSON string/bytes into native Python objects (dicts/lists) and json.dumps() to convert Python objects back into a formatted JSON string.",
 "algorithm": [
 "Import the json and urllib.request modules.",
 "Define the API URL to fetch data from.",
@@ -159,7 +159,7 @@ Request completed""",
 {
 "num": 5, "title": "Python Libraries and Basic Web Scraping",
 "aim": "To study and implement basic web scraping using Python libraries requests and BeautifulSoup.",
-"theory": "Web scraping is the process of extracting information from websites programmatically. The requests library is used to send HTTP requests and fetch the HTML content of a web page. BeautifulSoup, from the bs4 package, is used to parse HTML/XML documents and provides simple methods to navigate and search the parse tree, such as finding tags, titles, and text content.",
+"theory": "Web scraping is the process of programmatically extracting information from websites by fetching their raw HTML and parsing out the required data, commonly used for data collection, price monitoring, and research when no structured API is available; it should always be done in compliance with a site's terms of service and robots.txt. The requests library is a popular third-party HTTP client used to send GET/POST requests and retrieve a page's HTML content along with metadata like status codes and headers, and is generally preferred over the lower-level urllib for its simpler, more readable API. BeautifulSoup, from the bs4 package, is an HTML/XML parsing library that builds a navigable parse tree from raw markup and provides convenient methods to search and traverse it, such as tag access via dot notation (soup.title, soup.h1), find() and find_all() to locate elements by tag name, class, or attribute, and .text/.string to extract the readable text content of an element, abstracting away the need to manually write regular expressions against HTML.",
 "algorithm": [
 "Import the requests library and BeautifulSoup from bs4.",
 "Send a GET request to the target URL to fetch the HTML page.",
@@ -189,7 +189,7 @@ First paragraph: This domain is for use in documentation examples without needin
 {
 "num": 6, "title": "Arrays, Strings, Linked Lists, Stacks and Queues",
 "aim": "To study and implement basic operations on arrays, strings, linked lists, stacks, and queues in Python.",
-"theory": "Arrays (lists in Python) store elements in contiguous memory and support operations like insertion at the end. Strings are immutable sequences of characters that support slicing operations such as reversal. A Stack follows LIFO order supporting push/pop operations, while a Queue follows FIFO order supporting enqueue/dequeue operations, efficiently implemented using collections.deque.",
+"theory": "Arrays (implemented as lists in Python) store elements in contiguous, indexable memory locations, giving O(1) random access by index; appending to the end is amortized O(1), while inserting/deleting at arbitrary positions is O(n) due to element shifting. Strings in Python are immutable sequences of characters, meaning any operation that appears to modify a string (such as reversal) actually creates and returns a new string object; slicing with a step of -1 (s[::-1]) is a concise idiom for reversal because it walks the sequence from the last index to the first. A Stack enforces LIFO (Last In First Out) order, supporting push (insert at top) and pop (remove from top) in O(1) time, useful for reversing sequences, expression parsing, and recursion simulation. A Queue enforces FIFO (First In First Out) order, supporting enqueue (insert at rear) and dequeue (remove from front); collections.deque is preferred over a plain list for queues because it is backed by a doubly linked structure, giving O(1) complexity for operations at both ends versus O(n) for list.pop(0).",
 "algorithm": [
 "Create a list (array) and append a new element to it.",
 "Reverse a given string using slicing (s[::-1]).",
@@ -222,7 +222,7 @@ Queue after dequeue: [2, 3]""",
 {
 "num": 7, "title": "Tree and Graph Data Structures with DFS and BFS",
 "aim": "To study and implement graph traversal techniques - Breadth-First Search (BFS) and Depth-First Search (DFS).",
-"theory": "A graph is a data structure consisting of nodes (vertices) connected by edges, often represented using an adjacency list. BFS explores a graph level by level using a queue, visiting all neighbors of a node before moving to the next level. DFS explores as far as possible along each branch using recursion (or a stack) before backtracking. Both algorithms use a 'visited' set to avoid revisiting nodes.",
+"theory": "A Tree is a hierarchical, acyclic connected graph with a single root node, where every node (except the root) has exactly one parent, commonly used to represent hierarchical relationships such as file systems and organization charts. A Graph is a more general data structure consisting of nodes (vertices) connected by edges, which may be directed or undirected, weighted or unweighted, and can contain cycles; it is often represented using an adjacency list (a dictionary mapping each node to its neighbors, as used here) or an adjacency matrix. Breadth-First Search (BFS) explores a graph level by level using a queue (FIFO), visiting all neighbors of the current node before moving to the next level, which makes it well suited for finding the shortest path in an unweighted graph. Depth-First Search (DFS) explores as far as possible along each branch before backtracking, implemented either recursively (using the call stack) or iteratively with an explicit stack, and is useful for tasks like cycle detection and topological sorting. Both algorithms maintain a 'visited' set to avoid revisiting nodes and getting stuck in infinite loops when cycles are present, and both run in O(V + E) time, where V is the number of vertices and E is the number of edges.",
 "algorithm": [
 "Represent the graph as a dictionary of adjacency lists.",
 "For BFS: initialize a visited set and a queue with the start node; repeatedly dequeue a node, record it, and enqueue its unvisited neighbors.",
@@ -266,7 +266,7 @@ DFS Traversal: ['A', 'B', 'D', 'C']""",
 {
 "num": 8, "title": "Sorting and Searching Algorithms",
 "aim": "To study and implement Bubble Sort and Binary Search algorithms in Python.",
-"theory": "Bubble Sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order, with a time complexity of O(n^2). Binary Search is an efficient algorithm for finding an item in a sorted array by repeatedly dividing the search interval in half, achieving a time complexity of O(log n).",
+"theory": "Sorting algorithms arrange elements of a list into a defined order (typically ascending or descending) and are foundational to efficient searching and data processing. Bubble Sort is a simple comparison-based sorting algorithm that repeatedly steps through the list, compares each pair of adjacent elements, and swaps them if they are in the wrong order; after each full pass, the largest unsorted element 'bubbles up' to its correct position, giving a time complexity of O(n^2) in the average and worst case and O(n) in the best case (already sorted) with an early-exit optimization, and O(1) space complexity since sorting happens in place. Searching algorithms locate a target value within a collection. Linear Search checks elements sequentially (O(n)), while Binary Search is a much more efficient divide-and-conquer algorithm for finding an item in a sorted array: it repeatedly compares the target with the middle element and discards the half of the array that cannot contain the target, narrowing the search range until the element is found or the range becomes empty, achieving a time complexity of O(log n). Binary Search requires the input array to be sorted beforehand, which is why it is applied here after bubble_sort() has arranged the data.",
 "algorithm": [
 "Bubble Sort: for each pass, compare adjacent elements and swap them if the left is greater than the right; repeat until no swaps are needed.",
 "Binary Search: set low and high pointers; compute the mid index; compare the middle element with the target; narrow the search range accordingly until found or the range is empty.",
@@ -304,7 +304,7 @@ Index of 22: 2""",
 {
 "num": 9, "title": "Time and Space Complexity Analysis",
 "aim": "To study and analyze the time and space complexity of Linear Search and Binary Search algorithms.",
-"theory": "Time complexity measures how the running time of an algorithm grows with input size, while space complexity measures the memory required. Linear Search checks each element sequentially, giving O(n) time complexity. Binary Search works only on sorted data and repeatedly halves the search range, giving O(log n) time complexity. Both algorithms use O(1) additional space since they operate in-place.",
+"theory": "Time complexity measures how the running time of an algorithm grows as a function of input size (n), typically expressed using Big-O notation, which describes the worst-case upper bound on growth while ignoring constant factors and lower-order terms; common classes in increasing order of growth include O(1), O(log n), O(n), O(n log n), and O(n^2). Space complexity measures the additional (auxiliary) memory an algorithm requires beyond the input itself, which is important when working with large datasets or memory-constrained systems. Linear Search checks each element of the array sequentially until it finds a match or reaches the end, giving a worst-case time complexity of O(n) since it may need to examine every element. Binary Search works only on sorted data and repeatedly halves the search range by comparing the target with the middle element, giving a much better time complexity of O(log n), which scales far more efficiently as the dataset grows large - this is empirically demonstrated in this practical by timing both algorithms on a dataset of 100,000 elements. Both algorithms use O(1) additional space since they operate in-place using only a fixed number of variables regardless of input size, rather than allocating new data structures proportional to n.",
 "algorithm": [
 "Define linear_search() which iterates through the array checking each element against the target.",
 "Define binary_search() which divides the sorted array range in half repeatedly.",
@@ -355,7 +355,7 @@ Space Complexity: O(1) for both (in-place)""",
 {
 "num": 10, "title": "Recursion and Backtracking",
 "aim": "To study and implement recursion using a Factorial program and backtracking using the N-Queens problem in Python.",
-"theory": "Recursion is a technique where a function calls itself to solve smaller instances of a problem, as seen in the factorial function. Backtracking is an algorithmic technique for solving problems incrementally, trying partial solutions and abandoning ('backtracking') them if they fail to satisfy constraints, as demonstrated by the N-Queens problem, which places queens on a chessboard such that no two queens attack each other.",
+"theory": "Recursion is a programming technique where a function calls itself, directly or indirectly, to solve smaller instances of the same problem, until it reaches a base case that can be solved directly without further recursion; the factorial function demonstrates this, with factorial(0) = 1 as the base case and factorial(n) = n * factorial(n-1) as the recursive case, with each call pushing a new frame onto the call stack until the base case unwinds the recursion. Backtracking is an algorithmic technique for solving constraint-satisfaction problems incrementally, by building a solution one step at a time and abandoning ('backtracking' from) a partial solution as soon as it is determined that it cannot possibly lead to a valid complete solution, which prunes the search space far more efficiently than checking every possible combination (brute force). The N-Queens problem is a classic backtracking example: it requires placing N queens on an N x N chessboard such that no two queens attack each other (i.e., no two share the same row, column, or diagonal); the algorithm places a queen in a row, checks safety against all previously placed queens using is_safe(), recurses to the next row if safe, and backtracks (removes the queen and tries the next column) if no column in the current row is safe.",
 "algorithm": [
 "Factorial: if n is 0 return 1, otherwise return n multiplied by factorial(n-1).",
 "N-Queens: maintain a board array storing the column position of the queen in each row.",
@@ -405,7 +405,7 @@ First solution (col positions per row): [1, 3, 0, 2]""",
 {
 "num": 11, "title": "Responsive Web Pages using HTML, CSS and JavaScript",
 "aim": "To design and implement a responsive web page using HTML, CSS, and JavaScript.",
-"theory": "HTML provides the structure of a web page, CSS controls its presentation (layout, colors, spacing), and JavaScript adds interactivity. Responsive design ensures a web page adjusts its layout automatically to fit different screen sizes, commonly achieved using relative units, flexible containers, and max-width properties. JavaScript event handlers, such as onclick, allow the page to respond dynamically to user actions.",
+"theory": "HTML (HyperText Markup Language) provides the semantic structure and content of a web page using nested elements (tags) such as div, h2, p, and button. CSS (Cascading Style Sheets) controls the presentation of that structure, including layout, colors, spacing, fonts, and visual effects like box-shadow and border-radius, and can be applied inline, via an internal <style> block, or via an external stylesheet. JavaScript adds interactivity and dynamic behavior to an otherwise static page by manipulating the Document Object Model (DOM) - the browser's in-memory tree representation of the HTML - at runtime, for example by changing an element's innerText or innerHTML in response to user actions. Responsive Web Design ensures a page's layout automatically adjusts to fit different screen sizes and devices (desktop, tablet, mobile) without requiring separate versions of the site, commonly achieved using relative units (%, em, rem) instead of fixed pixels, flexible containers (Flexbox/Grid), media queries, and constraints like max-width so content neither overflows small screens nor stretches awkwardly on large ones. JavaScript event handlers, such as the onclick attribute or addEventListener(), allow the page to respond dynamically to user actions like clicks, input, or form submission without requiring a full page reload.",
 "algorithm": [
 "Create the HTML structure with a container div styled as a 'card'.",
 "Use CSS to style the body and card with background color, padding, border-radius, and box-shadow, and set a max-width on the card for responsiveness.",
@@ -446,7 +446,7 @@ screen width (responsive design).""",
 {
 "num": 12, "title": "React Basics and Component Architecture",
 "aim": "To study and implement basic React concepts such as components, props, and state using a Counter application.",
-"theory": "React is a JavaScript library for building user interfaces using reusable components. A functional component is a JavaScript function that returns JSX (HTML-like syntax). The useState hook allows components to hold and update local state; calling the setter function triggers a re-render with the updated value. Component composition allows nesting one component (Counter) inside another (App).",
+"theory": "React is a declarative, component-based JavaScript library (developed by Meta) for building user interfaces out of small, reusable, self-contained pieces called components, instead of manipulating the DOM directly and imperatively as in vanilla JavaScript. A functional component is simply a JavaScript function that accepts props (inputs) and returns JSX - a syntax extension that lets HTML-like markup be written directly inside JavaScript, which is compiled (transpiled) into regular JavaScript function calls (React.createElement) by tools like Babel. Props (short for properties) are read-only data passed from a parent component to a child component, enabling component reuse with different inputs. The useState hook is one of React's built-in Hooks, which let functional components hold local, mutable state without needing class components; calling its setter function (e.g., setCount) does not mutate the variable in place but instead schedules a re-render of the component with the updated value, and React efficiently updates only the changed parts of the real DOM using its Virtual DOM diffing algorithm. Component composition, as seen with the Counter component nested inside the App component, allows complex UIs to be built by combining small, independently testable pieces, one of React's core architectural strengths.",
 "algorithm": [
 "Import React and the useState hook.",
 "Define a Counter component that initializes a count state variable to 0 using useState.",
@@ -492,7 +492,7 @@ component and increases the displayed count by 1:
 {
 "num": 13, "title": "Web Application using Flask Framework",
 "aim": "To study and implement a simple web application using the Flask framework in Python.",
-"theory": "Flask is a lightweight Python web framework used to build web applications and APIs. It uses route decorators (@app.route) to map URL paths to Python functions (view functions), which return the response sent to the client. The app.run() method starts Flask's built-in development server to serve incoming HTTP requests.",
+"theory": "Flask is a lightweight, minimalistic Python 'micro' web framework built on top of the Werkzeug WSGI toolkit and Jinja2 templating engine, used to build web applications and RESTful APIs with minimal boilerplate compared to full-stack frameworks like Django. A Flask application is represented by an instance of the Flask class, typically created with app = Flask(__name__), where __name__ helps Flask locate resources relative to the module. Route decorators (@app.route(path)) bind a URL path (and optionally HTTP methods like GET/POST) to a Python function known as a view function; when a client requests that path, Flask invokes the corresponding view function and sends whatever it returns (a string, JSON, or rendered HTML template) back as the HTTP response body. Multiple routes allow a single application to serve different pages or API endpoints, as demonstrated by the '/' and '/about' routes. The app.run() method starts Flask's built-in development server (not intended for production use) to listen for and serve incoming HTTP requests on a local host and port, with debug=True enabling auto-reload on code changes and detailed in-browser error tracebacks during development.",
 "algorithm": [
 "Import Flask and create a Flask application instance.",
 "Define a route '/' mapped to a home() function that returns a welcome message.",
@@ -525,7 +525,7 @@ GET /about -> 200  "This is the About page." """,
 {
 "num": 14, "title": "Database Integration with Backend Application",
 "aim": "To study and implement database integration with a Python backend application using SQLite.",
-"theory": "SQLite is a lightweight, serverless, self-contained relational database engine bundled with Python via the sqlite3 module. It allows applications to create tables, insert records, and query data using standard SQL statements. A connection object represents the database session, and a cursor object is used to execute SQL commands and fetch results.",
+"theory": "SQLite is a lightweight, serverless, self-contained, file-based (or in-memory) relational database engine that requires no separate database server process or configuration, making it ideal for embedded applications, prototypes, and testing; it is bundled with Python's standard library via the sqlite3 module, so no external installation is needed. It allows applications to create tables with defined schemas (column names and data types), insert, update, delete, and query records using standard SQL (Structured Query Language) statements. A Connection object, created via sqlite3.connect(), represents an open session with the database (which can be a file path or the special value ':memory:' for a temporary, non-persistent in-memory database, as used in this practical), and is responsible for committing or rolling back transactions via conn.commit(). A Cursor object, obtained from the connection, is used to execute SQL commands (cur.execute()) and iterate over or fetch the results of queries (fetchone(), fetchall()), acting as a control structure over the result set. Backend database integration like this forms the persistence layer of most real-world applications, storing data that must survive beyond a single program execution.",
 "algorithm": [
 "Import the sqlite3 module and create an in-memory database connection.",
 "Create a cursor object from the connection.",
@@ -561,7 +561,7 @@ conn.close()""",
 {
 "num": 15, "title": "CRUD Operations in a Full-Stack Web Application",
 "aim": "To study and implement Create, Read, Update, and Delete (CRUD) operations on a database using Python and SQLite.",
-"theory": "CRUD refers to the four basic operations performed on persistent data: Create (insert new records), Read (retrieve records), Update (modify existing records), and Delete (remove records). These operations form the backbone of full-stack web applications, where the backend interacts with a database to manage application data using SQL statements executed through a database cursor.",
+"theory": "CRUD refers to the four fundamental operations performed on persistent data in virtually any data-driven application: Create (insert new records into the database, corresponding to the SQL INSERT statement and typically an HTTP POST request in a web API), Read (retrieve one or more existing records, corresponding to SQL SELECT and an HTTP GET request), Update (modify the values of existing records, corresponding to SQL UPDATE and an HTTP PUT/PATCH request), and Delete (remove records, corresponding to SQL DELETE and an HTTP DELETE request). These four operations form the backbone of full-stack web applications: the frontend (UI) captures user actions, the backend (server-side application logic, e.g., Flask or Express) receives requests and translates them into the appropriate database operations, and the database (here, SQLite) persists the data using SQL statements executed through a database cursor, with every write operation (Create/Update/Delete) requiring an explicit commit() to make the change durable. Understanding CRUD is essential because nearly every real-world feature - user registration, a shopping cart, a content management system - is ultimately composed of these same four operations applied to different types of data.",
 "algorithm": [
 "Connect to an SQLite in-memory database and create a products table.",
 "Create: insert new product records and commit the transaction, then display all records.",
@@ -661,6 +661,67 @@ def build_docx(practical, out_path):
     doc.save(out_path)
 
 
+def build_combined_pdf(practicals, out_path, heading_text):
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+    from reportlab.lib.units import cm
+    from reportlab.lib.enums import TA_LEFT
+    from reportlab.platypus import (
+        SimpleDocTemplate, Paragraph, Spacer, PageBreak, Preformatted,
+    )
+
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle(
+        "PracticalTitle", parent=styles["Heading1"], fontSize=15, spaceAfter=10,
+    )
+    section_style = ParagraphStyle(
+        "SectionHeading", parent=styles["Heading2"], fontSize=12,
+        spaceBefore=10, spaceAfter=4, textColor="#1a1a1a",
+    )
+    body_style = ParagraphStyle(
+        "Body", parent=styles["Normal"], fontSize=10, leading=14, alignment=TA_LEFT,
+    )
+    code_style = ParagraphStyle(
+        "Code", parent=styles["Code"], fontSize=8.5, leading=11,
+        backColor="#f4f4f4", borderPadding=6,
+    )
+
+    doc = SimpleDocTemplate(
+        out_path, pagesize=A4,
+        leftMargin=2 * cm, rightMargin=2 * cm, topMargin=2 * cm, bottomMargin=2 * cm,
+    )
+
+    story = [Paragraph(heading_text, title_style), Spacer(1, 8)]
+
+    for i, p in enumerate(practicals):
+        story.append(Paragraph(f"Practical {p['num']}: {p['title']}", title_style))
+
+        story.append(Paragraph("Aim", section_style))
+        story.append(Paragraph(p["aim"], body_style))
+
+        story.append(Paragraph("Theory", section_style))
+        story.append(Paragraph(p["theory"], body_style))
+
+        if p.get("algorithm"):
+            story.append(Paragraph("Algorithm", section_style))
+            for j, step in enumerate(p["algorithm"], 1):
+                story.append(Paragraph(f"{j}. {step}", body_style))
+
+        story.append(Paragraph("Program", section_style))
+        story.append(Preformatted(p["code"], code_style))
+
+        story.append(Paragraph("Output", section_style))
+        story.append(Preformatted(p["output"], code_style))
+
+        story.append(Paragraph("Result / Conclusion", section_style))
+        story.append(Paragraph(p["result"], body_style))
+
+        if i != len(practicals) - 1:
+            story.append(PageBreak())
+
+    doc.build(story)
+
+
 def main():
     for p in PRACTICALS:
         folder_name = f"Practical_{p['num']:02d}"
@@ -669,6 +730,11 @@ def main():
         out_path = os.path.join(folder_path, f"{folder_name}.docx")
         build_docx(p, out_path)
         print(f"Created {out_path}")
+
+    top5 = [p for p in PRACTICALS if p["num"] <= 5]
+    combined_out = os.path.join(ROOT, "Practicals_PDF", "Practicals_01-05_Combined.pdf")
+    build_combined_pdf(top5, combined_out, "Practicals 1-5: Combined Report")
+    print(f"Created {combined_out}")
 
 
 if __name__ == "__main__":
