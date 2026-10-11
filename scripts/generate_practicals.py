@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 from docx import Document
-from docx.shared import Pt
+from docx.shared import Pt, RGBColor
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 
@@ -47,6 +48,18 @@ Queue: ['A', 'B', 'C']
 Dequeued: A
 Linked List: [1, 2, 3]""",
 "result": "The stack, queue, and linked list data structures were successfully implemented and their basic operations (push/pop, enqueue/dequeue, traversal) were verified.",
+"viva": [
+    {"q": "What is the difference between a Stack and a Queue?",
+     "a": "A Stack follows LIFO (Last In First Out) — the last element inserted is the first to be removed (like a pile of plates). A Queue follows FIFO (First In First Out) — the first element inserted is the first to be removed (like a ticket line). Stack operations are push/pop at the top; Queue operations are enqueue at the rear and dequeue from the front."},
+    {"q": "Why is collections.deque preferred over a list for implementing a Queue in Python?",
+     "a": "list.pop(0) (dequeue from the front) is O(n) because all remaining elements must be shifted one position left. collections.deque is backed by a doubly linked list and provides O(1) popleft() and append(), making it the correct choice for FIFO queues where both ends are accessed."},
+    {"q": "What is a node in a Linked List, and what does it contain?",
+     "a": "A node is the basic unit of a linked list. It contains two parts: the data field (the actual value stored) and the next field (a reference/pointer to the next node in the sequence). The last node's next field is None, marking the end of the list."},
+    {"q": "What is the time complexity of push and pop operations on a Stack?",
+     "a": "Both push (append to end) and pop (remove from end) on a Python list-based stack are O(1) amortised time, because Python lists use dynamic arrays with amortised constant-time appends and direct index access at the last position."},
+    {"q": "What are the real-world applications of a Stack?",
+     "a": "Stacks are used in: (1) function call management — the call stack tracks active function frames; (2) expression evaluation and conversion (infix to postfix); (3) undo/redo mechanisms in text editors; (4) backtracking algorithms (maze solving, DFS); (5) browser history (back button)."},
+],
 },
 {
 "num": 2, "title": "Object-Oriented Programming Concepts",
@@ -80,6 +93,18 @@ for a in animals:
 "output": """Rex barks
 Whiskers meows""",
 "result": "OOP concepts including class definition, inheritance, and method overriding were successfully implemented and verified using Python.",
+"viva": [
+    {"q": "What are the four pillars of Object-Oriented Programming?",
+     "a": "The four pillars are: (1) Encapsulation — bundling data and methods together and restricting direct access to internal state; (2) Abstraction — exposing only relevant features and hiding complexity; (3) Inheritance — a subclass acquires properties and methods from a parent class; (4) Polymorphism — the ability of different objects to respond to the same method call in different ways."},
+    {"q": "What is the purpose of the __init__ method in Python?",
+     "a": "__init__ is the constructor method automatically called when a new object is created from a class. It initialises the instance's attributes (self.name = name, etc.). The self parameter refers to the newly created object itself, allowing attributes to be bound to that specific instance."},
+    {"q": "What is the difference between method overriding and method overloading?",
+     "a": "Method overriding occurs when a subclass provides its own implementation of a method that is already defined in the parent class (same name, same signature) — it enables runtime polymorphism. Method overloading means defining multiple methods with the same name but different parameter counts/types — Python does not natively support overloading; the last definition wins; it is simulated using default arguments or *args."},
+    {"q": "What is the difference between a class and an object?",
+     "a": "A class is a blueprint or template that defines attributes and methods (e.g., class Animal). An object (instance) is a concrete entity created from that class with its own state (e.g., Dog('Rex') creates one specific instance with name='Rex'). Multiple objects can be created from the same class, each with independent attribute values."},
+    {"q": "What is polymorphism and how is it demonstrated in this practical?",
+     "a": "Polymorphism means 'many forms' — different objects respond to the same method call differently. In this practical, both Dog and Cat inherit from Animal and override speak(). When we loop over a list of Animal references and call a.speak(), Python dynamically dispatches to the correct subclass implementation: Dog prints 'barks' and Cat prints 'meows', even though both are called through the same interface."},
+],
 },
 {
 "num": 3, "title": "File Handling and OS Module Operations",
@@ -120,6 +145,18 @@ Files in folder: ['sample.txt']
 After rename: ['renamed.txt']
 Cleanup done""",
 "result": "File handling and OS module operations (create, read, rename, delete) were successfully performed and verified.",
+"viva": [
+    {"q": "What are the different file opening modes in Python's open() function?",
+     "a": "'r' — read (default, file must exist); 'w' — write (creates or truncates); 'a' — append (creates or adds to end); 'x' — exclusive create (fails if file exists); 'b' — binary mode suffix (e.g. 'rb', 'wb'); '+' — read+write (e.g. 'r+', 'w+'). The mode determines whether the file pointer starts at the beginning or end and whether existing content is preserved."},
+    {"q": "Why should we use the 'with' statement when working with files?",
+     "a": "The 'with' statement uses Python's context manager protocol (__enter__ and __exit__). It guarantees the file is closed automatically when the block exits, even if an exception is raised. Without it, forgetting to call f.close() can cause resource leaks (file handles not released), data corruption (buffered data not flushed), or errors when other processes try to access the file."},
+    {"q": "What is the difference between os.makedirs() and os.mkdir()?",
+     "a": "os.mkdir() creates only a single directory and raises FileNotFoundError if any intermediate parent directory is missing. os.makedirs() creates the full path including all necessary intermediate directories (like mkdir -p in Unix). The exist_ok=True parameter suppresses the error if the directory already exists."},
+    {"q": "What is the difference between the os module and the shutil module?",
+     "a": "The os module provides low-level, single-item file system operations: create/rename/delete individual files and empty directories. The shutil (shell utilities) module provides higher-level operations: shutil.copy() copies a file, shutil.move() moves/renames files across filesystems, and shutil.rmtree() deletes an entire directory tree (including non-empty directories), which os.rmdir() cannot do."},
+    {"q": "What happens if you open a file in 'w' mode and the file already exists?",
+     "a": "Opening an existing file in 'w' (write) mode truncates it immediately — all existing content is erased and the file pointer is placed at position 0. If you want to add content without erasing, use 'a' (append) mode instead. If you want to create a file only if it does not already exist, use 'x' mode."},
+],
 },
 {
 "num": 4, "title": "Exception Handling and Fetching Data from a REST API",
@@ -155,6 +192,18 @@ finally:
 }
 Request completed""",
 "result": "Exception handling was successfully used to safely fetch and parse JSON data from a REST API.",
+"viva": [
+    {"q": "What is the difference between try-except-else-finally blocks?",
+     "a": "try: code that may raise an exception. except: runs only if an exception occurred in try — handles the error. else: runs only if NO exception occurred in try — for code that should execute on success. finally: always runs regardless of whether an exception occurred or not — used for cleanup (closing files, releasing locks). 'else' and 'finally' are optional."},
+    {"q": "What are the four main HTTP methods used in REST APIs?",
+     "a": "GET — retrieve a resource (read-only, no side effects); POST — create a new resource; PUT/PATCH — update an existing resource (PUT replaces entirely, PATCH modifies partially); DELETE — remove a resource. These map directly to CRUD operations: Create=POST, Read=GET, Update=PUT/PATCH, Delete=DELETE."},
+    {"q": "What is the difference between JSON and XML?",
+     "a": "JSON (JavaScript Object Notation) uses key-value pairs and arrays, is more compact, human-readable, and natively supported by JavaScript. XML (eXtensible Markup Language) uses opening/closing tags, supports attributes and namespaces, and is more verbose. JSON is preferred for REST APIs due to smaller payload size and easier parsing in most languages. XML is still used in SOAP web services and configuration files."},
+    {"q": "Why should you catch specific exceptions rather than using a bare 'except:'?",
+     "a": "A bare 'except:' catches everything including KeyboardInterrupt, SystemExit, and MemoryError — errors you usually don't want to suppress. It can hide bugs by swallowing unexpected errors silently. Catching specific exceptions (e.g., urllib.error.URLError, json.JSONDecodeError) makes the code more maintainable, easier to debug, and ensures only expected error types are handled, letting genuinely unexpected errors propagate."},
+    {"q": "What is the difference between urllib.request and the requests library?",
+     "a": "urllib.request is part of Python's standard library (no installation needed) but has a more verbose API. The requests library is a third-party package (pip install requests) with a much simpler, more Pythonic API: requests.get(url) vs urllib.request.urlopen(url). requests also automatically handles encoding, sessions, cookies, and authentication more easily. urllib is preferred when you want zero dependencies; requests is preferred for real-world applications."},
+],
 },
 {
 "num": 5, "title": "Python Libraries and Basic Web Scraping",
@@ -185,6 +234,18 @@ First Heading: Example Domain
 Number of paragraphs: 2
 First paragraph: This domain is for use in documentation examples without needing permission. Avoid use in...""",
 "result": "Basic web scraping was successfully implemented, extracting the title, heading, and paragraph content from a web page.",
+"viva": [
+    {"q": "What is web scraping and what are its legal/ethical considerations?",
+     "a": "Web scraping is the automated extraction of data from websites by fetching HTML and parsing it programmatically. Ethical/legal considerations: always check the site's robots.txt file (which lists paths scrapers should not access) and Terms of Service; avoid overloading servers with rapid requests; do not scrape personal or copyrighted data without permission; use official APIs when available. Violating these can lead to IP bans, legal action, or violation of laws like the CFAA."},
+    {"q": "What is the difference between soup.find() and soup.find_all()?",
+     "a": "soup.find(tag) returns the first matching element as a Tag object (or None if not found). soup.find_all(tag) returns a list of ALL matching elements (empty list if none found). find() is equivalent to find_all(..., limit=1)[0]. Both accept tag name, CSS class, id, or any attribute as search criteria. find() is used when you expect a unique element; find_all() when you need all occurrences."},
+    {"q": "What parsers can BeautifulSoup use, and which is recommended?",
+     "a": "'html.parser' is Python's built-in HTML parser — no extra install needed, reasonably fast, lenient with malformed HTML. 'lxml' is a fast C-based parser (pip install lxml) — best performance for large pages. 'html5lib' (pip install html5lib) parses exactly like a browser — slowest but most accurate for malformed HTML. For most tasks, 'html.parser' is sufficient; use 'lxml' for performance-critical scraping."},
+    {"q": "What is the difference between .text and .string in BeautifulSoup?",
+     "a": ".text (or .get_text()) returns all the text content of a tag and all its descendants concatenated as a single string, stripping HTML tags. .string returns the NavigableString of a tag ONLY if it contains a single string with no nested tags; it returns None if the tag has multiple children. Use .text for general extraction; .string only when you are certain the tag has a single text node."},
+    {"q": "How can you handle a failed HTTP request in web scraping?",
+     "a": "Check response.status_code: 200 = OK, 404 = Not Found, 403 = Forbidden, 429 = Too Many Requests. Use response.raise_for_status() to raise an HTTPError for 4xx/5xx responses. Wrap requests.get() in a try-except block for connection errors (requests.exceptions.ConnectionError, Timeout). Add retry logic with exponential backoff for rate-limited sites. Always set a timeout parameter to avoid hanging indefinitely."},
+],
 },
 {
 "num": 6, "title": "Arrays, Strings, Linked Lists, Stacks and Queues",
@@ -218,6 +279,18 @@ Reversed String: dlroW olleH
 Stack after pop: [1, 2]
 Queue after dequeue: [2, 3]""",
 "result": "Basic operations on arrays, strings, stacks, and queues were successfully implemented and verified.",
+"viva": [
+    {"q": "What is the difference between a Python list and a traditional array?",
+     "a": "A traditional array (e.g., in C) stores elements of the same data type in contiguous memory, providing fixed size and direct memory access. Python lists are dynamic arrays that can store heterogeneous types (int, str, objects), automatically resize, and support O(1) append (amortised). Python's array module or NumPy arrays provide typed arrays closer to traditional ones. For numeric computation, NumPy arrays are more memory-efficient and faster."},
+    {"q": "Why are Python strings immutable, and what are the implications?",
+     "a": "Strings are immutable because Python interns (caches) string objects for memory efficiency and thread safety — multiple variables can safely reference the same string object. Implications: any 'modification' (concatenation, slicing, upper()) creates a new string object. For performance when building strings in a loop, use a list and ''.join(parts) instead of repeated += which creates O(n²) temporary objects."},
+    {"q": "What does the slicing notation s[::-1] do?",
+     "a": "s[start:stop:step] is Python's slice syntax. s[::-1] uses start=None (end of string), stop=None (beginning of string), and step=-1 (move backwards one character at a time). This traverses the string from the last character to the first, effectively reversing it. It returns a new string object since strings are immutable."},
+    {"q": "What is the time complexity of inserting at the beginning of a Python list vs a deque?",
+     "a": "Inserting at the beginning of a Python list with list.insert(0, x) is O(n) because all existing elements must be shifted one position to the right to make room. deque.appendleft(x) is O(1) because a deque is implemented as a doubly-linked list, allowing constant-time insertion and deletion at both ends without shifting."},
+    {"q": "How does Python's list dynamically resize?",
+     "a": "Python lists use a dynamic array (over-allocation) strategy. When the internal buffer is full, Python allocates a new, larger buffer (roughly 1.125x growth factor) and copies all existing elements into it. This makes individual appends O(n) in the worst case but O(1) amortised over many appends, since resizing happens infrequently. The list object tracks both the logical length (len()) and the allocated capacity separately."},
+],
 },
 {
 "num": 7, "title": "Tree and Graph Data Structures with DFS and BFS",
@@ -262,6 +335,18 @@ print("DFS Traversal:", dfs('A'))""",
 "output": """BFS Traversal: ['A', 'B', 'C', 'D']
 DFS Traversal: ['A', 'B', 'D', 'C']""",
 "result": "BFS and DFS graph traversal algorithms were successfully implemented and their traversal orders were verified.",
+"viva": [
+    {"q": "What is the key difference between BFS and DFS?",
+     "a": "BFS (Breadth-First Search) uses a queue (FIFO) and explores all neighbors of a node before going deeper — it visits level by level. DFS (Depth-First Search) uses a stack (or recursion) and explores as far down one branch as possible before backtracking. BFS finds the shortest path in an unweighted graph; DFS is better for tasks like cycle detection, topological sorting, and solving mazes."},
+    {"q": "What is an adjacency list and how does it compare to an adjacency matrix?",
+     "a": "An adjacency list stores each vertex's neighbors as a list/set (e.g., a dictionary). Space: O(V + E). Efficient for sparse graphs. An adjacency matrix uses a V×V grid where matrix[i][j]=1 if edge (i,j) exists. Space: O(V²). Efficient for dense graphs and O(1) edge lookup. For most real-world graphs (sparse), adjacency lists are preferred."},
+    {"q": "Why is a 'visited' set necessary in graph traversal?",
+     "a": "Unlike trees, graphs can contain cycles (e.g., A→B→C→A). Without tracking visited nodes, the traversal would revisit nodes indefinitely, causing an infinite loop. The visited set records nodes already processed so they are skipped on re-encounter. For trees (which are acyclic), a visited set is not strictly necessary but is good practice."},
+    {"q": "What is the time complexity of BFS and DFS?",
+     "a": "Both BFS and DFS have time complexity O(V + E), where V is the number of vertices and E is the number of edges. Each vertex is visited once (O(V)) and each edge is examined once (O(E)). Space complexity: BFS uses O(V) for the queue (all nodes at the widest level); DFS uses O(V) for the recursion call stack (depth of the graph in the worst case)."},
+    {"q": "Give a real-world application of BFS and DFS each.",
+     "a": "BFS applications: shortest path in unweighted graphs (GPS navigation, social network friend suggestions at distance 1, 2, 3), level-order traversal of a tree, web crawlers. DFS applications: detecting cycles in a graph, topological sorting (dependency resolution), solving puzzles like mazes and Sudoku, finding connected components, generating permutations."},
+],
 },
 {
 "num": 8, "title": "Sorting and Searching Algorithms",
@@ -300,6 +385,18 @@ print("Index of 22:", binary_search(sorted_data, 22))""",
 "output": """Sorted Array: [11, 12, 22, 25, 64]
 Index of 22: 2""",
 "result": "Bubble Sort and Binary Search were successfully implemented, sorting the array and locating the target element correctly.",
+"viva": [
+    {"q": "What is the time complexity of Bubble Sort in best, average, and worst cases?",
+     "a": "Worst case (reverse sorted): O(n²) — every element must be swapped in every pass. Average case: O(n²). Best case (already sorted, with early-exit optimisation): O(n) — one pass with zero swaps detects sorted order. Space complexity: O(1) — in-place sorting with only a constant number of extra variables."},
+    {"q": "What is the prerequisite for Binary Search?",
+     "a": "The array must be sorted in ascending (or descending, with the comparison adjusted) order before applying Binary Search. If the array is unsorted, Binary Search may miss the target entirely and return a wrong result. The cost of sorting (e.g., O(n log n) with merge sort) is worthwhile only if many searches will be performed on the same dataset."},
+    {"q": "How does Binary Search achieve O(log n) time complexity?",
+     "a": "Binary Search halves the search space at each step. Starting with n elements: after 1 comparison n/2 remain, after 2 comparisons n/4 remain, and so on. After k comparisons, n/2^k elements remain. The search ends when n/2^k = 1, i.e., k = log₂(n). So the maximum number of comparisons is log₂(n), giving O(log n) time complexity."},
+    {"q": "Is Bubble Sort a stable sorting algorithm? What does 'stable' mean?",
+     "a": "Yes, Bubble Sort is stable. A stable sorting algorithm preserves the relative order of equal elements — if two elements have the same key, the one that appeared first in the original array appears first in the sorted output. Bubble Sort is stable because it only swaps adjacent elements when strictly greater-than (not equal), so equal elements never swap past each other."},
+    {"q": "What are some more efficient alternatives to Bubble Sort?",
+     "a": "Merge Sort: O(n log n) all cases, stable, uses O(n) extra space. Quick Sort: O(n log n) average, O(n²) worst case, in-place (O(log n) stack). Heap Sort: O(n log n) all cases, in-place, not stable. Python's built-in sorted() uses Timsort — O(n log n) worst, O(n) best, stable, hybrid of merge sort and insertion sort. Bubble Sort is mainly used for educational purposes, not in production."},
+],
 },
 {
 "num": 9, "title": "Time and Space Complexity Analysis",
@@ -351,6 +448,18 @@ print("Space Complexity: O(1) for both (in-place)")""",
 Binary Search Time: 0.000005 s  (Complexity: O(log n))
 Space Complexity: O(1) for both (in-place)""",
 "result": "The time and space complexity of Linear Search and Binary Search were analyzed and empirically verified, confirming Binary Search is significantly faster on large sorted datasets.",
+"viva": [
+    {"q": "What is Big-O notation and what does it represent?",
+     "a": "Big-O notation describes the upper bound (worst-case) growth rate of an algorithm's time or space requirements as the input size n increases, ignoring constant factors and lower-order terms. For example, O(n) means the time grows linearly with n; O(n²) means it grows quadratically. It helps compare algorithms independently of hardware or implementation details. Other notations: Ω (best case), Θ (tight/average case)."},
+    {"q": "Why does Binary Search have O(log n) time complexity?",
+     "a": "Each comparison in Binary Search eliminates half the remaining elements. Starting with n elements, after 1 step n/2 remain, after 2 steps n/4, after k steps n/2^k. The algorithm terminates when 1 element remains: n/2^k = 1 ⟹ k = log₂(n). So the maximum number of comparisons is proportional to log₂(n), giving O(log n) time complexity."},
+    {"q": "What is the difference between time complexity and space complexity?",
+     "a": "Time complexity measures how the number of operations (running time) grows with input size n. Space complexity measures how much additional memory (auxiliary space) an algorithm uses beyond the input itself, also as a function of n. An algorithm can be fast but memory-hungry (e.g., merge sort: O(n log n) time, O(n) space) or slow but memory-efficient (e.g., bubble sort: O(n²) time, O(1) space)."},
+    {"q": "What does O(1) space complexity mean for both search algorithms?",
+     "a": "O(1) space complexity means the algorithm uses a constant amount of additional memory regardless of the input size n. Both Linear Search and Binary Search only use a fixed number of scalar variables (loop counter i, or low/high/mid pointers) — no additional arrays, lists, or data structures are allocated proportional to n. The input array itself is not counted as auxiliary space."},
+    {"q": "When would you prefer Linear Search over Binary Search?",
+     "a": "Linear Search is preferred when: (1) the data is unsorted — sorting first adds O(n log n) cost that outweighs the benefit for a single search; (2) the dataset is very small (n < ~20) — the constant overhead of Binary Search matters; (3) searching through a linked list — you cannot do random O(1) access needed for Binary Search; (4) searching on a condition other than equality (e.g., first element satisfying a predicate)."},
+],
 },
 {
 "num": 10, "title": "Recursion and Backtracking",
@@ -401,6 +510,18 @@ print("First solution (col positions per row):", solutions[0])""",
 Number of solutions for 4-Queens: 2
 First solution (col positions per row): [1, 3, 0, 2]""",
 "result": "Recursion and backtracking were successfully implemented and demonstrated using the Factorial and N-Queens programs.",
+"viva": [
+    {"q": "What are the two essential components of every recursive function?",
+     "a": "1. Base case: a condition under which the function returns a result directly without calling itself (e.g., factorial(0) = 1). It stops the recursion and prevents infinite loops. 2. Recursive case: the function calls itself with a simpler/smaller version of the problem (e.g., n * factorial(n-1)), making progress toward the base case."},
+    {"q": "What is a stack overflow in the context of recursion?",
+     "a": "Each recursive call adds a new frame (with local variables and the return address) to the call stack. If recursion is too deep (no base case, or n is very large), the call stack exhausts available memory, causing a stack overflow (RecursionError in Python: 'maximum recursion depth exceeded'). Python's default recursion limit is 1000. sys.setrecursionlimit() can increase it, but deep recursion should be converted to iteration for safety."},
+    {"q": "What is backtracking and how does it differ from brute force?",
+     "a": "Brute force generates all possible solutions and checks each one — extremely slow for large search spaces. Backtracking builds the solution incrementally and abandons (backtracks from) a partial solution as soon as a constraint violation is detected, without exploring the remaining subtree. This pruning makes backtracking much faster than brute force for constraint-satisfaction problems like N-Queens, Sudoku, and crossword puzzles."},
+    {"q": "How does the is_safe() function check for diagonal conflicts in N-Queens?",
+     "a": "Two queens at (r1, c1) and (r2, c2) are on the same diagonal if and only if |r1 - r2| == |c1 - c2| (the row distance equals the column distance). is_safe(row, col) checks for three conflicts with each previously placed queen at board[r]: same column (board[r] == col), or same diagonal (abs(board[r] - col) == abs(r - row)). Row conflicts are impossible since each row places exactly one queen."},
+    {"q": "What is the difference between direct and indirect recursion?",
+     "a": "Direct recursion: a function calls itself directly (e.g., factorial calls factorial). Indirect recursion: function A calls function B which calls function A (e.g., isEven(n) calls isOdd(n-1) which calls isEven(n-2)). Both require proper base cases to terminate. Mutual recursion (indirect) is sometimes used for alternating state machines but is generally harder to reason about and optimise."},
+],
 },
 {
 "num": 11, "title": "Responsive Web Pages using HTML, CSS and JavaScript",
@@ -442,6 +563,18 @@ On clicking the button, the page updates and shows:
 The card layout adjusts automatically to fit any
 screen width (responsive design).""",
 "result": "A responsive web page was successfully designed and implemented using HTML, CSS, and JavaScript, with verified interactivity and layout adjustment.",
+"viva": [
+    {"q": "What is the difference between inline, internal, and external CSS?",
+     "a": "Inline CSS: style attribute directly on an HTML element (<p style='color:red'>). Highest specificity, hardest to maintain. Internal CSS: <style> block inside the <head> — applies to one page, good for small prototypes. External CSS: a separate .css file linked via <link rel='stylesheet'>. Best practice for real projects — separates concerns, enables caching, shared across multiple pages. Specificity order: inline > ID > class > tag."},
+    {"q": "What is the Document Object Model (DOM)?",
+     "a": "The DOM is a tree-structured, in-memory representation of an HTML document created by the browser when a page loads. Each HTML element becomes a node in the tree. JavaScript can access and manipulate this tree via the document object (e.g., document.getElementById(), element.innerText = '...'). Changes to the DOM are immediately reflected in the browser without reloading the page, enabling dynamic interactivity."},
+    {"q": "What is responsive web design and what techniques achieve it?",
+     "a": "Responsive web design (RWD) makes a webpage layout adapt to different screen sizes (desktop, tablet, mobile) automatically. Key techniques: (1) fluid grids using % widths instead of fixed px; (2) flexible images (max-width: 100%); (3) CSS media queries (@media (max-width: 768px) {...}) to apply different styles at breakpoints; (4) CSS Flexbox and Grid for adaptive layouts; (5) the viewport meta tag (<meta name='viewport' content='width=device-width, initial-scale=1'>)."},
+    {"q": "What is the difference between innerText and innerHTML?",
+     "a": "innerText sets or gets the visible text content of an element, treating the value as plain text — any HTML tags in the string are escaped and displayed literally. innerHTML sets or gets the HTML markup inside an element — HTML tags are parsed and rendered by the browser. Use innerText for plain text to avoid XSS vulnerabilities; use innerHTML only when you deliberately want to insert HTML markup and have sanitised the input."},
+    {"q": "What is the CSS Box Model?",
+     "a": "The CSS Box Model describes how each HTML element is rendered as a rectangular box consisting of four layers from inside out: Content (the actual text/image), Padding (space between content and border, transparent), Border (visible line around the padding), Margin (transparent space outside the border, separating elements). The default box-sizing is content-box (width/height apply to content only); box-sizing: border-box includes padding and border in the width/height calculation, which is more intuitive for layout."},
+],
 },
 {
 "num": 12, "title": "React Basics and Component Architecture",
@@ -488,6 +621,18 @@ component and increases the displayed count by 1:
   Count: 2
   Count: 3 ...""",
 "result": "Basic React concepts - components, props, and state management using useState - were successfully implemented and verified in the Counter application.",
+"viva": [
+    {"q": "What is the Virtual DOM and why does React use it?",
+     "a": "The Virtual DOM is a lightweight JavaScript copy of the real DOM. When state changes, React creates a new Virtual DOM tree and diffs it against the previous one (reconciliation), identifying the minimal set of real DOM changes needed. It then applies only those changes (patching), which is much faster than re-rendering the entire page. This makes React updates efficient, even for complex UIs with many components."},
+    {"q": "What is the difference between props and state in React?",
+     "a": "Props (properties) are read-only inputs passed from a parent component to a child — the child cannot modify them. They are used for component configuration and data flow downwards. State is mutable data managed inside a component using useState — when state changes, React re-renders that component. Props flow down; state is local. State changes trigger re-renders; prop changes cause the parent to re-render, which may update the child's props."},
+    {"q": "What is JSX and how does it work?",
+     "a": "JSX (JavaScript XML) is a syntax extension that lets you write HTML-like markup inside JavaScript code. It is NOT valid JavaScript — a transpiler (Babel) converts JSX to React.createElement() calls. For example, <h1>Hello</h1> becomes React.createElement('h1', null, 'Hello'). JSX allows embedding JavaScript expressions using curly braces {expression}. It makes component code more readable and maintainable than raw React.createElement() calls."},
+    {"q": "What does useState return and how do you use it?",
+     "a": "useState(initialValue) returns an array of exactly two elements: [currentValue, setterFunction]. Destructuring: const [count, setCount] = useState(0). count holds the current state value (0 initially). setCount(newValue) schedules a re-render with the new value — it does NOT mutate count directly. Each component instance has its own independent state, and state persists across re-renders (unlike regular variables which reset)."},
+    {"q": "What is the difference between React and vanilla JavaScript for building UIs?",
+     "a": "Vanilla JS manually manipulates the DOM (document.getElementById, innerHTML), which becomes complex and error-prone for large, dynamic UIs. React uses declarative programming — you describe what the UI should look like for a given state, and React handles DOM updates. React provides: component reuse, unidirectional data flow, efficient updates via Virtual DOM, and a rich ecosystem. Trade-off: React adds a framework overhead (~40KB); vanilla JS is lighter for simple pages."},
+],
 },
 {
 "num": 13, "title": "Web Application using Flask Framework",
@@ -521,6 +666,18 @@ Tested using Flask's test client:
 GET / -> 200  "Welcome to my Flask Web App!"
 GET /about -> 200  "This is the About page." """,
 "result": "A simple Flask web application with multiple routes was successfully created and its endpoints were verified to return the correct responses.",
+"viva": [
+    {"q": "What does the @app.route() decorator do in Flask?",
+     "a": "@app.route('/path') is a Python decorator that registers the decorated function as the handler (view function) for the specified URL path. When a client sends an HTTP request matching that path, Flask's URL dispatcher (Werkzeug's routing system) calls the corresponding view function and returns its response. By default, only GET requests are accepted; add methods=['GET','POST'] to handle multiple HTTP methods."},
+    {"q": "What is the difference between Flask and Django?",
+     "a": "Flask is a micro-framework: minimal built-in features (routing, templating, development server), highly flexible, you add only what you need (ORM, auth, etc. are separate packages). Django is a full-stack framework: batteries-included with ORM, admin panel, authentication, forms, migrations out of the box. Flask is better for small apps, microservices, and REST APIs. Django is better for large, database-heavy web applications where convention over configuration is preferred."},
+    {"q": "What is WSGI and why is it important for Flask?",
+     "a": "WSGI (Web Server Gateway Interface) is a Python standard (PEP 3333) that defines how web servers communicate with Python web applications. Flask is built on Werkzeug, a WSGI toolkit. A WSGI server (Gunicorn, uWSGI) calls the Flask app as a Python callable, passing the request environment and a response callback. This standard interface allows Flask apps to run on any WSGI-compatible server in production, decoupling the framework from the server."},
+    {"q": "Why should debug=True never be used in production?",
+     "a": "debug=True enables: (1) automatic server restart on code changes; (2) the Werkzeug interactive debugger — an in-browser Python REPL that appears on unhandled exceptions. The interactive debugger allows arbitrary Python code execution in the server's process, which is a critical security vulnerability. Any visitor who triggers an error page could execute system commands. In production, use debug=False and a WSGI server like Gunicorn with proper error logging."},
+    {"q": "How does Flask's if __name__ == '__main__' guard work?",
+     "a": "When Python runs a file directly (python app.py), __name__ is set to '__main__'. When the file is imported as a module (import app), __name__ is the module name ('app'). The guard ensures app.run() is only called when the script is executed directly, not when imported (e.g., by a WSGI server or test suite that imports the app object without wanting to start the server)."},
+],
 },
 {
 "num": 14, "title": "Database Integration with Backend Application",
@@ -557,6 +714,18 @@ conn.close()""",
 (1, 'Amit', 85)
 (2, 'Priya', 92)""",
 "result": "Database integration with a Python backend was successfully implemented using SQLite, with table creation, insertion, and retrieval of records verified.",
+"viva": [
+    {"q": "What is the difference between SQLite and MySQL/PostgreSQL?",
+     "a": "SQLite is serverless, file-based (or in-memory), zero-configuration, and single-process — ideal for embedded use, mobile apps, and prototyping. MySQL and PostgreSQL are client-server databases requiring a separate running server process, supporting multiple concurrent connections, user authentication, and large-scale production workloads with better performance, concurrency control (MVCC in PostgreSQL), and advanced features. SQLite is not suitable for high-concurrency web applications."},
+    {"q": "What is the purpose of the cursor in sqlite3?",
+     "a": "A cursor (cur = conn.cursor()) is an interface to execute SQL commands and fetch results. cur.execute(sql) sends a query to the database engine. cur.fetchone() returns the next row as a tuple (or None). cur.fetchall() returns all remaining rows as a list of tuples. The cursor maintains the current position in the result set, allowing row-by-row iteration. A connection can have multiple cursors for parallel queries."},
+    {"q": "Why is conn.commit() necessary after INSERT/UPDATE/DELETE?",
+     "a": "SQLite (and most relational databases) use transactions — a group of statements treated as an atomic unit. Changes made by INSERT/UPDATE/DELETE are held in a pending transaction in memory until conn.commit() makes them permanent (durable) in the database file. Without commit(), the changes are lost when the connection closes. conn.rollback() discards the pending changes. SELECT queries do not need commit() as they do not modify data."},
+    {"q": "What is the difference between ':memory:' and a file-path database?",
+     "a": "sqlite3.connect(':memory:') creates a temporary database entirely in RAM — extremely fast, but all data is lost when the connection closes or the program exits. It is ideal for testing and temporary computation. sqlite3.connect('mydb.sqlite') creates or opens a persistent database file on disk — data survives program restarts. For production applications, always use a file-based database."},
+    {"q": "What is SQL injection and how can it be prevented in sqlite3?",
+     "a": "SQL injection occurs when user-supplied input is concatenated directly into an SQL string, allowing an attacker to insert malicious SQL code. Example: f\"SELECT * FROM users WHERE name='{name}'\" — if name is \"' OR '1'='1\", it returns all rows. Prevention: always use parameterised queries with placeholders: cur.execute('SELECT * FROM users WHERE name=?', (name,)). The sqlite3 module safely escapes the value, preventing injection."},
+],
 },
 {
 "num": 15, "title": "CRUD Operations in a Full-Stack Web Application",
@@ -617,124 +786,311 @@ After UPDATE:
 After DELETE:
 (1, 'Pen', 15)""",
 "result": "CRUD operations (Create, Read, Update, Delete) were successfully implemented and verified on an SQLite database, forming the core of a full-stack web application's backend logic.",
+"viva": [
+    {"q": "What do CRUD operations map to in SQL and HTTP?",
+     "a": "Create → SQL INSERT, HTTP POST. Read → SQL SELECT, HTTP GET. Update → SQL UPDATE, HTTP PUT (full replace) or PATCH (partial update). Delete → SQL DELETE, HTTP DELETE. This mapping is the foundation of RESTful API design: each resource (e.g., /products) exposes these four operations via the corresponding HTTP methods on its URL."},
+    {"q": "What is the difference between SQL UPDATE and DELETE?",
+     "a": "UPDATE modifies the values of one or more columns in existing rows that match a WHERE condition — the rows remain in the table. DELETE removes entire rows that match a WHERE condition. Both require a WHERE clause in practice (omitting it affects ALL rows). Both are write operations requiring conn.commit() to persist. TRUNCATE (not in SQLite standard) removes all rows faster by dropping and re-creating the table internally."},
+    {"q": "What happens if you run UPDATE or DELETE without a WHERE clause?",
+     "a": "Without a WHERE clause, UPDATE modifies every row in the table and DELETE removes every row. This is usually a catastrophic mistake in production. Always include a WHERE clause to target specific records (e.g., WHERE id=1). In production databases, use transactions so you can rollback if you accidentally run a destructive command without the WHERE clause."},
+    {"q": "What is a PRIMARY KEY and why is it important in CRUD?",
+     "a": "A PRIMARY KEY is a column (or combination of columns) that uniquely identifies each row in a table. It must be NOT NULL and UNIQUE. In SQLite, INTEGER PRIMARY KEY auto-increments. In CRUD: the primary key is the target for Read (WHERE id=?), Update (SET ... WHERE id=?), and Delete (WHERE id=?) operations. Without a primary key, you cannot uniquely address individual records for update or deletion."},
+    {"q": "What is the difference between a full-stack and a backend-only application?",
+     "a": "A backend-only application exposes data via APIs (JSON responses) but has no built-in user interface — clients (mobile apps, SPAs) consume the API separately. A full-stack application includes both the frontend (HTML/CSS/JS user interface, e.g., Jinja2 templates in Flask) and the backend (server logic, database) in one codebase. Full-stack covers the entire application from database to UI; backend-only is one tier of a multi-tier architecture."},
+],
 },
 ]
 
 
-def add_heading(doc, text):
-    h = doc.add_heading(text, level=2)
-    return h
+# ─────────────────────────────────────────────────────────────────────────────
+#  DOCX builder
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _add_heading(doc, text, level=2):
+    return doc.add_heading(text, level=level)
 
 
-def add_code_block(doc, code):
+def _add_code_block(doc, code):
     p = doc.add_paragraph()
     run = p.add_run(code)
     run.font.name = "Consolas"
-    run.font.size = Pt(10)
+    run.font.size = Pt(9.5)
     p.paragraph_format.left_indent = Pt(12)
 
 
 def build_docx(practical, out_path):
     doc = Document()
-    title = doc.add_heading(f"Practical {practical['num']}: {practical['title']}", level=1)
+    doc.add_heading(f"Practical {practical['num']}: {practical['title']}", level=1)
 
-    add_heading(doc, "Aim")
+    _add_heading(doc, "Aim")
     doc.add_paragraph(practical["aim"])
 
-    add_heading(doc, "Theory")
+    _add_heading(doc, "Theory")
     doc.add_paragraph(practical["theory"])
 
     if practical.get("algorithm"):
-        add_heading(doc, "Algorithm")
+        _add_heading(doc, "Algorithm")
         for step in practical["algorithm"]:
             doc.add_paragraph(step, style="List Number")
 
-    add_heading(doc, "Program")
-    add_code_block(doc, practical["code"])
+    _add_heading(doc, "Program")
+    _add_code_block(doc, practical["code"])
 
-    add_heading(doc, "Output")
-    add_code_block(doc, practical["output"])
+    _add_heading(doc, "Output")
+    _add_code_block(doc, practical["output"])
 
-    add_heading(doc, "Result / Conclusion")
+    _add_heading(doc, "Result / Conclusion")
     doc.add_paragraph(practical["result"])
+
+    if practical.get("viva"):
+        _add_heading(doc, "Viva Questions")
+        for i, qa in enumerate(practical["viva"], 1):
+            q_para = doc.add_paragraph()
+            q_run = q_para.add_run(f"Q{i}. {qa['q']}")
+            q_run.bold = True
+
+            a_para = doc.add_paragraph()
+            a_run = a_para.add_run(f"Ans: {qa['a']}")
+            a_para.paragraph_format.left_indent = Pt(18)
 
     doc.save(out_path)
 
 
-def build_combined_pdf(practicals, out_path, heading_text):
-    from reportlab.lib.pagesizes import A4
+# ─────────────────────────────────────────────────────────────────────────────
+#  PDF builder (attractive, printable)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _make_styles():
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+    from reportlab.lib.enums import TA_LEFT, TA_CENTER
+    from reportlab.lib import colors
+
+    base = getSampleStyleSheet()
+
+    DARK_BLUE = colors.HexColor("#003366")
+    MID_BLUE = colors.HexColor("#0055a5")
+    ACCENT = colors.HexColor("#e8f0fb")
+    CODE_BG = colors.HexColor("#f4f4f4")
+    OUT_BG = colors.HexColor("#eaf4ea")
+    VIVA_Q_BG = colors.HexColor("#fff8e1")
+
+    styles = {
+        "practical_title": ParagraphStyle(
+            "PracticalTitle",
+            parent=base["Heading1"],
+            fontSize=15,
+            textColor=DARK_BLUE,
+            spaceAfter=4,
+            spaceBefore=0,
+            leading=20,
+        ),
+        "section": ParagraphStyle(
+            "SectionHeading",
+            parent=base["Heading2"],
+            fontSize=11,
+            textColor=MID_BLUE,
+            spaceBefore=10,
+            spaceAfter=3,
+            leading=15,
+        ),
+        "body": ParagraphStyle(
+            "Body",
+            parent=base["Normal"],
+            fontSize=9.5,
+            leading=14,
+            alignment=TA_LEFT,
+            spaceAfter=4,
+        ),
+        "code": ParagraphStyle(
+            "Code",
+            parent=base["Code"],
+            fontSize=8,
+            leading=10.5,
+            backColor=CODE_BG,
+            borderPadding=(4, 6, 4, 6),
+            leftIndent=8,
+            borderColor=colors.HexColor("#cccccc"),
+            borderWidth=0.5,
+        ),
+        "output": ParagraphStyle(
+            "Output",
+            parent=base["Code"],
+            fontSize=8,
+            leading=10.5,
+            backColor=OUT_BG,
+            borderPadding=(4, 6, 4, 6),
+            leftIndent=8,
+            borderColor=colors.HexColor("#99cc99"),
+            borderWidth=0.5,
+        ),
+        "viva_q": ParagraphStyle(
+            "VivaQ",
+            parent=base["Normal"],
+            fontSize=9.5,
+            leading=13,
+            textColor=DARK_BLUE,
+            backColor=VIVA_Q_BG,
+            borderPadding=(3, 5, 3, 5),
+            leftIndent=4,
+            fontName="Helvetica-Bold",
+            spaceAfter=2,
+        ),
+        "viva_a": ParagraphStyle(
+            "VivaA",
+            parent=base["Normal"],
+            fontSize=9,
+            leading=13,
+            leftIndent=14,
+            spaceAfter=6,
+        ),
+    }
+    return styles, DARK_BLUE, MID_BLUE, ACCENT
+
+
+def _esc(text):
+    """Escape XML special chars so ReportLab Paragraph doesn't choke on < > &."""
+    return (text
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;"))
+
+
+def _build_practical_story(p, styles, DARK_BLUE, MID_BLUE, ACCENT):
+    from reportlab.platypus import Paragraph, Spacer, Preformatted, HRFlowable
     from reportlab.lib.units import cm
-    from reportlab.lib.enums import TA_LEFT
-    from reportlab.platypus import (
-        SimpleDocTemplate, Paragraph, Spacer, PageBreak, Preformatted,
+    from reportlab.lib import colors
+
+    story = []
+
+    # Title bar
+    story.append(Paragraph(
+        _esc(f"Practical {p['num']}: {p['title']}"), styles["practical_title"]
+    ))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=DARK_BLUE, spaceAfter=6))
+
+    story.append(Paragraph("Aim", styles["section"]))
+    story.append(Paragraph(_esc(p["aim"]), styles["body"]))
+
+    story.append(Paragraph("Theory", styles["section"]))
+    story.append(Paragraph(_esc(p["theory"]), styles["body"]))
+
+    if p.get("algorithm"):
+        story.append(Paragraph("Algorithm", styles["section"]))
+        for j, step in enumerate(p["algorithm"], 1):
+            story.append(Paragraph(_esc(f"{j}. {step}"), styles["body"]))
+
+    story.append(Paragraph("Program", styles["section"]))
+    story.append(Preformatted(p["code"], styles["code"]))
+    story.append(Spacer(1, 4))
+
+    story.append(Paragraph("Output", styles["section"]))
+    story.append(Preformatted(p["output"], styles["output"]))
+    story.append(Spacer(1, 4))
+
+    story.append(Paragraph("Result / Conclusion", styles["section"]))
+    story.append(Paragraph(_esc(p["result"]), styles["body"]))
+
+    if p.get("viva"):
+        story.append(Spacer(1, 6))
+        story.append(HRFlowable(width="100%", thickness=0.8, color=MID_BLUE, spaceAfter=4))
+        story.append(Paragraph("Viva Questions", styles["section"]))
+        for i, qa in enumerate(p["viva"], 1):
+            story.append(Paragraph(_esc(f"Q{i}. {qa['q']}"), styles["viva_q"]))
+            story.append(Paragraph(f"<b>Ans:</b> {_esc(qa['a'])}", styles["viva_a"]))
+
+    return story
+
+
+def _make_doc_template(out_path):
+    from reportlab.lib.pagesizes import A4
+    from reportlab.platypus import SimpleDocTemplate
+    from reportlab.lib.units import cm
+
+    return SimpleDocTemplate(
+        out_path,
+        pagesize=A4,
+        leftMargin=2.2 * cm,
+        rightMargin=2.2 * cm,
+        topMargin=2 * cm,
+        bottomMargin=2 * cm,
     )
 
-    styles = getSampleStyleSheet()
-    title_style = ParagraphStyle(
-        "PracticalTitle", parent=styles["Heading1"], fontSize=15, spaceAfter=10,
-    )
-    section_style = ParagraphStyle(
-        "SectionHeading", parent=styles["Heading2"], fontSize=12,
-        spaceBefore=10, spaceAfter=4, textColor="#1a1a1a",
-    )
-    body_style = ParagraphStyle(
-        "Body", parent=styles["Normal"], fontSize=10, leading=14, alignment=TA_LEFT,
-    )
-    code_style = ParagraphStyle(
-        "Code", parent=styles["Code"], fontSize=8.5, leading=11,
-        backColor="#f4f4f4", borderPadding=6,
+
+def build_individual_pdf(practical, out_path):
+    from reportlab.platypus import PageBreak
+
+    styles, DARK_BLUE, MID_BLUE, ACCENT = _make_styles()
+    doc = _make_doc_template(out_path)
+    story = _build_practical_story(practical, styles, DARK_BLUE, MID_BLUE, ACCENT)
+    doc.build(story)
+
+
+def build_combined_pdf(practicals, out_path, heading_text):
+    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+    from reportlab.lib import colors
+    from reportlab.lib.enums import TA_CENTER
+    from reportlab.platypus import Paragraph, Spacer, PageBreak, HRFlowable
+
+    styles, DARK_BLUE, MID_BLUE, ACCENT = _make_styles()
+
+    cover_style = ParagraphStyle(
+        "Cover",
+        parent=getSampleStyleSheet()["Heading1"],
+        fontSize=17,
+        textColor=DARK_BLUE,
+        alignment=TA_CENTER,
+        spaceAfter=12,
     )
 
-    doc = SimpleDocTemplate(
-        out_path, pagesize=A4,
-        leftMargin=2 * cm, rightMargin=2 * cm, topMargin=2 * cm, bottomMargin=2 * cm,
-    )
+    doc = _make_doc_template(out_path)
 
-    story = [Paragraph(heading_text, title_style), Spacer(1, 8)]
+    story = [
+        Paragraph(heading_text, cover_style),
+        HRFlowable(width="100%", thickness=2, color=DARK_BLUE, spaceAfter=12),
+        Spacer(1, 4),
+    ]
 
     for i, p in enumerate(practicals):
-        story.append(Paragraph(f"Practical {p['num']}: {p['title']}", title_style))
-
-        story.append(Paragraph("Aim", section_style))
-        story.append(Paragraph(p["aim"], body_style))
-
-        story.append(Paragraph("Theory", section_style))
-        story.append(Paragraph(p["theory"], body_style))
-
-        if p.get("algorithm"):
-            story.append(Paragraph("Algorithm", section_style))
-            for j, step in enumerate(p["algorithm"], 1):
-                story.append(Paragraph(f"{j}. {step}", body_style))
-
-        story.append(Paragraph("Program", section_style))
-        story.append(Preformatted(p["code"], code_style))
-
-        story.append(Paragraph("Output", section_style))
-        story.append(Preformatted(p["output"], code_style))
-
-        story.append(Paragraph("Result / Conclusion", section_style))
-        story.append(Paragraph(p["result"], body_style))
-
+        story.extend(_build_practical_story(p, styles, DARK_BLUE, MID_BLUE, ACCENT))
         if i != len(practicals) - 1:
             story.append(PageBreak())
 
     doc.build(story)
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+#  Main
+# ─────────────────────────────────────────────────────────────────────────────
+
 def main():
+    pdf_dir = os.path.join(ROOT, "Practicals_PDF")
+    os.makedirs(pdf_dir, exist_ok=True)
+
     for p in PRACTICALS:
         folder_name = f"Practical_{p['num']:02d}"
         folder_path = os.path.join(ROOT, folder_name)
         os.makedirs(folder_path, exist_ok=True)
-        out_path = os.path.join(folder_path, f"{folder_name}.docx")
-        build_docx(p, out_path)
-        print(f"Created {out_path}")
 
+        # DOCX
+        docx_path = os.path.join(folder_path, f"{folder_name}.docx")
+        build_docx(p, docx_path)
+        print(f"  DOCX  {docx_path}")
+
+        # Individual PDF
+        pdf_path = os.path.join(pdf_dir, f"{folder_name}.pdf")
+        build_individual_pdf(p, pdf_path)
+        print(f"  PDF   {pdf_path}")
+
+    # Combined PDF: all 15 practicals
+    all_combined = os.path.join(pdf_dir, "Practicals_All_Combined.pdf")
+    build_combined_pdf(PRACTICALS, all_combined, "PS — 5th Semester Practicals (All 15)")
+    print(f"  COMBINED PDF  {all_combined}")
+
+    # Combined PDF: practicals 1-5 (kept for backward compatibility)
     top5 = [p for p in PRACTICALS if p["num"] <= 5]
-    combined_out = os.path.join(ROOT, "Practicals_PDF", "Practicals_01-05_Combined.pdf")
-    build_combined_pdf(top5, combined_out, "Practicals 1-5: Combined Report")
-    print(f"Created {combined_out}")
+    combined_05 = os.path.join(pdf_dir, "Practicals_01-05_Combined.pdf")
+    build_combined_pdf(top5, combined_05, "Practicals 1-5: Combined Report")
+    print(f"  COMBINED PDF  {combined_05}")
 
 
 if __name__ == "__main__":
